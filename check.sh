@@ -24,9 +24,7 @@ do
                 testcase_pass=false
                 echo "missing $outfile" >&2
             else
-                if ! diff -u \
-                    <(diff -u "$file1" "$file2" | tail -n +3) \
-                    <(tail -n +3 "$outfile") > /dev/null
+                if [ "$(diff -u "$file1" "$file2" | tail -n +3)" != "$(tail -n +3 "$outfile")" ]
                 then
                     testcase_pass=false
                     echo "incorrect contents in $outfile" >&2
